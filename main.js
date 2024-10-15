@@ -106,6 +106,10 @@ if (WebGL.isWebGL2Available()) {
     composer.setSize(window.innerWidth, window.innerHeight);
   });
 
+  window.addEventListener("scroll", () => {
+    camera.position.z = 3;
+  });
+
   // Camera update function
   const updateCamera = (t) => {
     const time = t * 0.1;
