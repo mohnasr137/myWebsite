@@ -208,4 +208,12 @@ span {
   .media img {
     width: 40px;
   }
+
+  #loadingScreen h2 {
+    font-size: 1rem;
+  }
+
+  .spinner {
+    width: 35px;
+  }
 }
