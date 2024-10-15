@@ -6,18 +6,10 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import spline from "./imports/spline.js";
 
-function isMobile() {
-  return /Mobi/i.test(navigator.userAgent);
-}
-
 if (WebGL.isWebGL2Available()) {
   // Setup scene, camera, and renderer
   const width = window.innerWidth;
   let height = window.innerHeight;
-  if (isMobile()) {
-    console.log("Mobile");
-    height = 1000;
-  }
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.6);
 
@@ -102,10 +94,6 @@ if (WebGL.isWebGL2Available()) {
     renderer.setSize(window.innerWidth, window.innerHeight);
     composer.setSize(window.innerWidth, window.innerHeight);
   });
-
-  // window.addEventListener("scroll", () => {
-  //   camera.position.z = 3;
-  // });
 
   // Camera update function
   const updateCamera = (t) => {
