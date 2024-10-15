@@ -12,7 +12,10 @@ function isMobile() {
 if (WebGL.isWebGL2Available()) {
   // Setup scene, camera, and renderer
   const width = window.innerWidth;
-  const height = window.innerHeight;
+  let height = window.innerHeight;
+  if (isMobile()) {
+    height = height + height / 5;
+  }
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.6);
 
