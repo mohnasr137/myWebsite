@@ -6,17 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio - Mohamed Nasr</title>
 
-    <!-- Preload and load font in one request -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap"
     />
 
-    <!-- Minified and external resources -->
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="icons/icon.ico" />
 
-    <!-- Defer loading external icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -34,15 +31,12 @@
       <h2>loading...</h2>
     </div>
 
-    <!-- Black Screen -->
-    <div id="blackScreen"></div>
-
     <!-- Main content -->
     <div id="backgroundCanvas"></div>
 
     <section class="home" id="home">
       <div class="image">
-        <img src="imgs/mine.jpg" alt="Mine" loading="lazy" />
+        <img src="imgs/mine.jpg" alt="Mine" />
       </div>
       <div class="content">
         <div class="container-text">
@@ -54,25 +48,25 @@
               href="https://www.facebook.com/profile.php?id=100035538612653&mibextid=gik2fB"
               target="_blank"
             >
-              <img src="imgs/facebook.png" alt="Facebook" loading="lazy" />
+              <img src="imgs/facebook.png" alt="Facebook" />
             </a>
             <a
               href="https://api.whatsapp.com/send?phone=201093669048"
               target="_blank"
             >
-              <img src="imgs/whatsapp.png" alt="WhatsApp" loading="lazy" />
+              <img src="imgs/whatsapp.png" alt="WhatsApp" />
             </a>
             <a href="https://github.com/mohnasr137" target="_blank">
-              <img src="imgs/github.png" alt="Github" loading="lazy" />
+              <img src="imgs/github.png" alt="Github" />
             </a>
             <a href="https://linktr.ee/MohNasr137" target="_blank">
-              <img src="imgs/linktree.png" alt="LinkedTree" loading="lazy" />
+              <img src="imgs/linktree.png" alt="LinkedTree" />
             </a>
             <a
               href="https://www.linkedin.com/in/mohamed-nasr-68b62b243"
               target="_blank"
             >
-              <img src="imgs/linkedin.png" alt="LinkedIn" loading="lazy" />
+              <img src="imgs/linkedin.png" alt="LinkedIn" />
             </a>
           </div>
         </div>
@@ -129,11 +123,11 @@
 
     <!-- Deferred script loading -->
     <script type="module" src="./main.js" defer></script>
-
     <script>
-      // Hide loading screen once the entire page is fully loaded
       window.addEventListener("load", function () {
-        document.body.classList.add("loaded");
+        setTimeout(() => {
+          document.body.classList.add("loaded");
+        }, 1000);
       });
     </script>
   </body>
