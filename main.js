@@ -6,9 +6,9 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import spline from "./imports/spline.js";
 
-function isMobile() {
-  return /Mobi/i.test(navigator.userAgent);
-}
+// function isMobile() {
+//   return /Mobi/i.test(navigator.userAgent);
+// }
 
 if (WebGL.isWebGL2Available()) {
   // Setup scene, camera, and renderer
