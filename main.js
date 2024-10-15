@@ -6,9 +6,18 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import spline from "./imports/spline.js";
 
+function isMobile() {
+  return /Mobi/i.test(navigator.userAgent);
+}
+
 if (WebGL.isWebGL2Available()) {
+  // Setup scene, camera, and renderer
   const width = window.innerWidth;
-  const height = window.innerHeight;
+  let height = window.innerHeight;
+  if (isMobile()) {
+    console.log("Mobile");
+    height = document.body.scrollHeight;
+  }
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.6);
 
@@ -16,16 +25,19 @@ if (WebGL.isWebGL2Available()) {
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   camera.position.z = 3;
 
+  // Append renderer to DOM
   document.getElementById("backgroundCanvas").appendChild(renderer.domElement);
   renderer.setSize(width, height);
   renderer.setAnimationLoop(animate);
 
+  // Orbit controls with damping
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.2;
   controls.minDistance = 2.3;
   controls.maxDistance = 8;
 
+  // Post-processing
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
 
@@ -40,6 +52,7 @@ if (WebGL.isWebGL2Available()) {
   bloomPass.radius = 0;
   composer.addPass(bloomPass);
 
+  // Create spline and tube geometry
   const points = spline.getPoints(100);
   const tubeGeometry = new THREE.TubeGeometry(spline, 222, 0.65, 16, true);
   const tubeMaterial = new THREE.MeshBasicMaterial({
@@ -49,12 +62,14 @@ if (WebGL.isWebGL2Available()) {
   const tube = new THREE.Mesh(tubeGeometry, tubeMaterial);
   scene.add(tube);
 
+  // Add tube edges
   const tubeEdges = new THREE.EdgesGeometry(tubeGeometry, 0.2);
   const tubeLineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
   const tubeLines = new THREE.LineSegments(tubeEdges, tubeLineMaterial);
   scene.add(tubeLines);
 
-  const numBoxes = 80;
+  // Create random boxes along the spline
+  const numBoxes = 100;
   const boxSize = 0.075;
   const boxGeometry = new THREE.BoxGeometry(boxSize, boxSize, boxSize);
 
@@ -70,6 +85,7 @@ if (WebGL.isWebGL2Available()) {
       Math.random() * Math.PI
     );
 
+    // Add box wireframe lines
     const boxEdges = new THREE.EdgesGeometry(boxGeometry, 0.2);
     const boxLineMaterial = new THREE.LineBasicMaterial({ color: 0xffff00 });
     const boxLines = new THREE.LineSegments(boxEdges, boxLineMaterial);
@@ -79,22 +95,19 @@ if (WebGL.isWebGL2Available()) {
     scene.add(boxLines);
   }
 
+  // Window resize event listener
   window.addEventListener("resize", () => {
-    const aspectRatio = window.innerWidth / window.innerHeight;
-    camera.aspect = aspectRatio;
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     composer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  let lastScrollY = window.scrollY;
-  window.addEventListener("scroll", () => {
-    const currentScrollY = window.scrollY;
-    const scrollDelta = currentScrollY - lastScrollY;
-    camera.position.z += scrollDelta * 0.01;
-    lastScrollY = currentScrollY;
-  });
+  // window.addEventListener("scroll", () => {
+  //   camera.position.z = 3;
+  // });
 
+  // Camera update function
   const updateCamera = (t) => {
     const time = t * 0.1;
     const looptime = 15 * 1000;
@@ -105,6 +118,7 @@ if (WebGL.isWebGL2Available()) {
     camera.lookAt(lookAt);
   };
 
+  // Animation loop
   function animate(t = 0) {
     updateCamera(t);
     composer.render(scene, camera);
