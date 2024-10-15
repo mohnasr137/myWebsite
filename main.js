@@ -16,7 +16,7 @@ if (WebGL.isWebGL2Available()) {
   let height = window.innerHeight;
   if (isMobile()) {
     console.log("Mobile");
-    height = document.body.scrollHeight;
+    height = 1000;
   }
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.6);
