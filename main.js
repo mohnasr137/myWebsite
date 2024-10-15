@@ -6,6 +6,10 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import spline from "./imports/spline.js";
 
+function isMobile() {
+  return /Mobi/i.test(navigator.userAgent);
+}
+
 if (WebGL.isWebGL2Available()) {
   // Setup scene, camera, and renderer
   const width = window.innerWidth;
@@ -14,7 +18,10 @@ if (WebGL.isWebGL2Available()) {
   scene.fog = new THREE.FogExp2(0x000000, 0.6);
 
   const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  const renderer = new THREE.WebGLRenderer({
+    antialias: !isMobile(),
+    powerPreference: isMobile() ? "low-power" : undefined,
+  });
   camera.position.z = 3;
 
   // Append renderer to DOM

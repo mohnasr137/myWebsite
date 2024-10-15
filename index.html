@@ -26,47 +26,6 @@
       media="print"
       onload="this.media='all'"
     />
-
-    <style>
-      /* Loading screen styles */
-      #loadingScreen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #ffffff;
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-
-      .spinner {
-        width: 40px;
-        height: 40px;
-        border: 6px solid #f3f3f3;
-        border-top: 6px solid #000; /* You can use your theme color */
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-bottom: 15px;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Hide content until loading is done */
-      body.loaded #loadingScreen {
-        display: none;
-      }
-    </style>
   </head>
   <body>
     <!-- Loading Screen -->
@@ -74,6 +33,9 @@
       <div class="spinner"></div>
       <h2>loading...</h2>
     </div>
+
+    <!-- Black Screen -->
+    <div id="blackScreen"></div>
 
     <!-- Main content -->
     <div id="backgroundCanvas"></div>
