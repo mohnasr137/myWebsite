@@ -5,26 +5,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio - Mohamed Nasr</title>
+
+    <!-- Preload and load font in one request -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap"
+    />
+
+    <!-- Minified and external resources -->
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="icons/icon.ico" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+
+    <!-- Defer loading external icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
+      media="print"
+      onload="this.media='all'"
     />
+
+    <style>
+      /* Loading screen styles */
+      #loadingScreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 6px solid #f3f3f3;
+        border-top: 6px solid #000; /* You can use your theme color */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 15px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Hide content until loading is done */
+      body.loaded #loadingScreen {
+        display: none;
+      }
+    </style>
   </head>
   <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+      <div class="spinner"></div>
+      <h2>loading...</h2>
+    </div>
+
+    <!-- Main content -->
     <div id="backgroundCanvas"></div>
 
     <section class="home" id="home">
       <div class="image">
-        <img src="imgs/mine.jpg" alt="Mine" />
+        <img src="imgs/mine.jpg" alt="Mine" loading="lazy" />
       </div>
       <div class="content">
         <div class="container-text">
@@ -35,24 +91,27 @@
             <a
               href="https://www.facebook.com/profile.php?id=100035538612653&mibextid=gik2fB"
               target="_blank"
-              ><img src="imgs/facebook.png" alt="Facebook"
-            /></a>
+            >
+              <img src="imgs/facebook.png" alt="Facebook" loading="lazy" />
+            </a>
             <a
               href="https://api.whatsapp.com/send?phone=201093669048"
               target="_blank"
-              ><img src="imgs/whatsapp.png" alt="WhatsApp"
-            /></a>
-            <a href="https://github.com/mohnasr137" target="_blank"
-              ><img src="imgs/github.png" alt="Github"
-            /></a>
-            <a href="https://linktr.ee/MohNasr137" target="_blank"
-              ><img src="imgs/linktree.png" alt="LinkedTree"
-            /></a>
+            >
+              <img src="imgs/whatsapp.png" alt="WhatsApp" loading="lazy" />
+            </a>
+            <a href="https://github.com/mohnasr137" target="_blank">
+              <img src="imgs/github.png" alt="Github" loading="lazy" />
+            </a>
+            <a href="https://linktr.ee/MohNasr137" target="_blank">
+              <img src="imgs/linktree.png" alt="LinkedTree" loading="lazy" />
+            </a>
             <a
               href="https://www.linkedin.com/in/mohamed-nasr-68b62b243"
               target="_blank"
-              ><img src="imgs/linkedin.png" alt="LinkedIn"
-            /></a>
+            >
+              <img src="imgs/linkedin.png" alt="LinkedIn" loading="lazy" />
+            </a>
           </div>
         </div>
       </div>
@@ -106,6 +165,14 @@
       </div>
     </section>
 
-    <script type="module" src="./main.js"></script>
+    <!-- Deferred script loading -->
+    <script type="module" src="./main.js" defer></script>
+
+    <script>
+      // Hide loading screen once the entire page is fully loaded
+      window.addEventListener("load", function () {
+        document.body.classList.add("loaded");
+      });
+    </script>
   </body>
 </html>
