@@ -5,26 +5,15 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import spline from "./imports/spline.js";
 
-function isMobile() {
-  return /Mobi/i.test(navigator.userAgent);
-}
-
 if (WebGL.isWebGL2Available()) {
   // Setup scene, camera, and renderer
   const width = window.innerWidth;
   let height = window.innerHeight;
-  if (isMobile()) {
-    height = height + height / 5;
-  }
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.6);
 
   const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
-  // const renderer = new THREE.WebGLRenderer({ antialias: true });
-  const renderer = new THREE.WebGLRenderer({
-    antialias: !isMobile(),
-    powerPreference: isMobile() ? "low-power" : undefined,
-  });
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
   camera.position.z = 3;
 
   // Append renderer to DOM
@@ -48,7 +37,7 @@ if (WebGL.isWebGL2Available()) {
   composer.addPass(bloomPass);
 
   // Create spline and tube geometry
-  const points = spline.getPoints(80);
+  const points = spline.getPoints(100);
   const tubeGeometry = new THREE.TubeGeometry(spline, 222, 0.65, 16, true);
   const tubeMaterial = new THREE.MeshBasicMaterial({
     color: 0x0000ff,
@@ -64,7 +53,7 @@ if (WebGL.isWebGL2Available()) {
   scene.add(tubeLines);
 
   // Create random boxes along the spline
-  const numBoxes = 80;
+  const numBoxes = 100;
   const boxSize = 0.075;
   const boxGeometry = new THREE.BoxGeometry(boxSize, boxSize, boxSize);
 
@@ -96,9 +85,6 @@ if (WebGL.isWebGL2Available()) {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     composer.setSize(window.innerWidth, window.innerHeight);
-    
-    alert("Window resized!");
-    console.log("resize");
   });
 
   // Camera update function
