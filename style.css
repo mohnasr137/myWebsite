@@ -172,10 +172,10 @@ span {
 
 @media (max-width: 600px) {
   .image img {
-    margin: 1.2rem 1.2rem 0.8rem 1.2rem;
-    width: 160px;
+    margin: 0.6rem 0.8rem 0.4rem 1rem;
+    width: 140px;
     border-radius: 100%;
-    border: 10px inset red;
+    border: 8px inset red;
   }
 
   .group {
@@ -183,7 +183,7 @@ span {
   }
 
   .group h4 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 
   .btn {
@@ -196,13 +196,13 @@ span {
   }
 
   .content h1 {
-    font-size: 2.4rem;
+    font-size: 2rem;
     padding: 0.2rem;
   }
 
   .content h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
   }
 
   .content h4 {
@@ -211,7 +211,7 @@ span {
 
   .media {
     gap: 0.6rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
   }
 
   .media img {

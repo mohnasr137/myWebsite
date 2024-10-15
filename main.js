@@ -13,15 +13,21 @@ function isMobile() {
 if (WebGL.isWebGL2Available()) {
   // Setup scene, camera, and renderer
   const width = window.innerWidth;
-  const height = window.innerHeight;
+  let height = 0;
+  if (isMobile()) {
+    height = document.body.scrollHeight;
+  } else {
+    height = window.innerHeight;
+  }
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.6);
 
   const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 100);
-  const renderer = new THREE.WebGLRenderer({
-    antialias: !isMobile(),
-    powerPreference: isMobile() ? "low-power" : undefined,
-  });
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  // const renderer = new THREE.WebGLRenderer({
+  //   antialias: !isMobile(),
+  //   powerPreference: isMobile() ? "low-power" : undefined,
+  // });
   camera.position.z = 3;
 
   // Append renderer to DOM
