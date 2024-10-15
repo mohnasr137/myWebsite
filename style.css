@@ -18,7 +18,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: #ffffff;
   z-index: 9999;
   display: flex;
@@ -55,7 +55,7 @@ body.loaded #loadingScreen {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   z-index: -1;
   overflow: hidden;
 }
@@ -97,9 +97,9 @@ span {
 }
 
 .btn {
-  width: 500px;
+  width: 550px;
   font-size: 1.2rem;
-  margin: 0.8rem 1.5rem;
+  margin: 0.8rem 0rem;
   padding: 30px 20px;
   background-color: var(--first-color);
   border-radius: 40px;
