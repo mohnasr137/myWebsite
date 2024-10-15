@@ -96,6 +96,9 @@ if (WebGL.isWebGL2Available()) {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     composer.setSize(window.innerWidth, window.innerHeight);
+    
+    alert("Window resized!");
+    console.log("resize");
   });
 
   // Camera update function
