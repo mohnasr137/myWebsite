@@ -44,10 +44,9 @@ if (WebGL.isWebGL2Available()) {
   composer.addPass(bloomPass);
 
   // Create spline and tube geometry
-  const points = spline.getPoints(100);
   const tubeGeometry = new THREE.TubeGeometry(spline, 222, 0.65, 16, true);
   const tubeMaterial = new THREE.MeshBasicMaterial({
-    color: 0x0000ff,
+    color: 0x1e90ff,
     wireframe: true,
   });
   const tube = new THREE.Mesh(tubeGeometry, tubeMaterial);
@@ -55,7 +54,7 @@ if (WebGL.isWebGL2Available()) {
 
   // Add tube edges
   const tubeEdges = new THREE.EdgesGeometry(tubeGeometry, 0.2);
-  const tubeLineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+  const tubeLineMaterial = new THREE.LineBasicMaterial({ color: 0xff4500 });
   const tubeLines = new THREE.LineSegments(tubeEdges, tubeLineMaterial);
   scene.add(tubeLines);
 
@@ -78,7 +77,7 @@ if (WebGL.isWebGL2Available()) {
 
     // Add box wireframe lines
     const boxEdges = new THREE.EdgesGeometry(boxGeometry, 0.2);
-    const boxLineMaterial = new THREE.LineBasicMaterial({ color: 0xffff00 });
+    const boxLineMaterial = new THREE.LineBasicMaterial({ color: 0xffd700 });
     const boxLines = new THREE.LineSegments(boxEdges, boxLineMaterial);
 
     boxLines.position.copy(position);
@@ -88,7 +87,7 @@ if (WebGL.isWebGL2Available()) {
 
   // Window resize event listener
   window.addEventListener("resize", () => {
-    if (isMobile()) return;
+    if (isMobile() && width == window.innerWidth) return;
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
