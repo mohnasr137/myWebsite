@@ -5,10 +5,17 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import spline from "./imports/spline.js";
 
+function isMobile() {
+  return /Mobi/i.test(navigator.userAgent);
+}
+
 if (WebGL.isWebGL2Available()) {
   // Setup scene, camera, and renderer
   const width = window.innerWidth;
   let height = window.innerHeight;
+  if (isMobile()) {
+    height = height + height / 5;
+  }
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.6);
 
@@ -81,6 +88,7 @@ if (WebGL.isWebGL2Available()) {
 
   // Window resize event listener
   window.addEventListener("resize", () => {
+    if (isMobile()) return;
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
